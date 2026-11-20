@@ -1,9 +1,23 @@
 <x-layouts.shop :title="$product->name">
+@php
+    $name = strtolower($product->name);
+    $img = match(true) {
+        str_contains($name, 'cappuccino') => 'https://images.unsplash.com/photo-1541167760496-1628856ab772?w=900&q=80',
+        str_contains($name, 'espresso') => 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=900&q=80',
+        str_contains($name, 'cold brew') => 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=900&q=80',
+        str_contains($name, 'coklat') => 'https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=900&q=80',
+        str_contains($name, 'croissant') => 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=900&q=80',
+        str_contains($name, 'kentang') => 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=900&q=80',
+        str_contains($name, 'tubruk') => 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80',
+        str_contains($name, 'susu') => 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=900&q=80',
+        default => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=900&q=80',
+    };
+@endphp
     <a href="{{ route('home') }}#menu" class="text-sm font-medium text-stone-600 hover:text-stone-900">&larr; Kembali ke menu</a>
 
     <div class="mt-6 grid gap-10 md:grid-cols-2">
-        <div class="overflow-hidden rounded-lg border border-stone-200 bg-stone-100">
-            <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="aspect-square w-full object-cover">
+        <div class="overflow-hidden rounded-xl border border-stone-200 bg-stone-100" style="height: 420px; display: block;">
+            <img src="{{ $img }}" alt="{{ $product->name }}" class="w-full object-cover" style="height: 420px; width: 100%; object-fit: cover; display: block;">
         </div>
 
         <div>

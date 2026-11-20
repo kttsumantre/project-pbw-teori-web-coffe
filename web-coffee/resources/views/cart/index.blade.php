@@ -11,8 +11,22 @@
         <div class="mt-8 grid gap-10 lg:grid-cols-3">
             <ul class="divide-y divide-stone-200 border-y border-stone-200 lg:col-span-2">
                 @foreach ($lines as $line)
+                    @php
+                        $name = strtolower($line->product->name);
+                        $img = match(true) {
+                            str_contains($name, 'cappuccino') => 'https://images.unsplash.com/photo-1541167760496-1628856ab772?w=400&q=80',
+                            str_contains($name, 'espresso') => 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&q=80',
+                            str_contains($name, 'cold brew') => 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=400&q=80',
+                            str_contains($name, 'coklat') => 'https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=400&q=80',
+                            str_contains($name, 'croissant') => 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80',
+                            str_contains($name, 'kentang') => 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&q=80',
+                            str_contains($name, 'tubruk') => 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80',
+                            str_contains($name, 'susu') => 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80',
+                            default => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80',
+                        };
+                    @endphp
                     <li class="flex flex-wrap items-center gap-4 py-5">
-                        <img src="{{ $line->product->image_url }}" alt="" class="h-20 w-20 rounded-md object-cover">
+                        <img src="{{ $img }}" alt="{{ $line->product->name }}" class="h-20 w-20 rounded-md object-cover" style="height: 80px; width: 80px; object-fit: cover; display: block;">
 
                         <div class="min-w-0 flex-1">
                             <a href="{{ route('products.show', $line->product->slug) }}" class="font-semibold text-stone-900 hover:underline">{{ $line->product->name }}</a>

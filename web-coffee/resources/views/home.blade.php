@@ -1,41 +1,50 @@
 <x-layouts.shop title="Menu">
-    <x-slot:hero>
-        <section class="bg-stone-900 text-stone-100">
-            <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-2 md:items-center md:py-20">
-                <div>
-                    <h1 class="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-                        Pesan sekarang, ambil saat masih hangat.
-                    </h1>
-                    <p class="mt-5 max-w-md text-lg text-stone-300">
-                        Pilih kopi dan camilan dari rumah, lalu ambil di toko begitu pesananmu siap.
-                    </p>
-                    <div class="mt-8 flex flex-wrap gap-3">
-                        <x-button variant="light" href="#menu" class="px-5 py-2.5">Lihat menu</x-button>
-                        <a href="{{ route('feedback.index') }}" class="inline-flex items-center rounded-md border border-stone-600 px-5 py-2.5 text-sm font-semibold text-stone-100 hover:bg-stone-800">Baca masukan pelanggan</a>
-                    </div>
-                </div>
+<x-slot:hero>
+    <section class="relative overflow-hidden bg-stone-950 text-stone-100">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1800&auto=format&fit=crop" alt="" aria-hidden="true" class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30 blur-md">
+        <div class="absolute inset-0 bg-black/80" aria-hidden="true"></div>
 
-                {{-- Papan menu: daftar yang terasa seperti papan tulis di balik bar --}}
-                <div class="rounded-lg border border-stone-700 bg-stone-800/60 p-6">
-                    <h2 class="text-lg font-bold text-white">Baru di bar</h2>
-
-                    @if ($featured->isEmpty())
-                        <p class="mt-4 text-stone-400">Menu belum tersedia. Silakan cek lagi nanti.</p>
-                    @else
-                        <ul class="mt-5 space-y-3">
-                            @foreach ($featured as $item)
-                                <li class="flex items-baseline gap-2">
-                                    <a href="{{ route('products.show', $item->slug) }}" class="font-medium text-stone-50 hover:underline">{{ $item->name }}</a>
-                                    <span class="flex-1 border-b border-dotted border-stone-500" aria-hidden="true"></span>
-                                    <span class="tabular-nums text-amber-400"><x-money :value="$item->price" /></span>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endif
+        <div class="relative mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-2 md:items-center md:py-20">
+            <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-amber-500">Web Coffee — Jakarta</p>
+                <h1 class="mt-3 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
+                    Pesan sekarang,<br>ambil saat masih hangat.
+                </h1>
+                <p class="mt-5 max-w-md text-base leading-relaxed text-stone-300">
+                    Pilih kopi dan camilan dari rumah, lalu ambil di toko begitu pesananmu siap. Gak perlu antre.
+                </p>
+                <div class="mt-8 flex flex-wrap gap-3">
+                    <x-button variant="light" href="#menu" class="px-5 py-2.5">Lihat menu</x-button>
+                    <a href="{{ route('feedback.index') }}" class="inline-flex items-center rounded-md border border-stone-600 px-5 py-2.5 text-sm font-semibold text-stone-100 hover:bg-stone-800">Baca masukan pelanggan</a>
                 </div>
+                <p class="mt-6 text-sm text-stone-400">Buka hari ini · 08.00 - 21.00 · Jl. Kopi No. 12</p>
             </div>
-        </section>
-    </x-slot:hero>
+
+            <div class="rounded-2xl border border-white/10 bg-stone-950/80 p-6 backdrop-blur-sm md:p-7">
+                <div class="flex items-baseline justify-between">
+                    <h2 class="text-base font-bold text-white">Baru di bar</h2>
+                    <span class="text-xs text-stone-400">Update minggu ini</span>
+                </div>
+
+                @if ($featured->isEmpty())
+                    <p class="mt-4 text-stone-400">Menu belum tersedia. Silakan cek lagi nanti.</p>
+                @else
+                    <ul class="mt-5 space-y-4">
+                        @foreach ($featured as $item)
+                            <li class="flex items-baseline gap-3">
+                                <a href="{{ route('products.show', $item->slug) }}" class="font-medium text-stone-50 hover:text-amber-400 hover:underline">{{ $item->name }}</a>
+                                <span class="flex-1 border-b border-dotted border-stone-600" aria-hidden="true"></span>
+                                <span class="shrink-0 tabular-nums font-semibold text-amber-400"><x-money :value="$item->price" /></span>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+
+                <a href="#menu" class="mt-6 block text-sm font-semibold text-white hover:underline">Lihat semua menu →</a>
+            </div>
+        </div>
+    </section>
+</x-slot:hero>
 
     <section id="menu" class="scroll-mt-20">
         <div class="flex flex-wrap items-end justify-between gap-4">

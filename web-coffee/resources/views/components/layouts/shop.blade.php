@@ -28,7 +28,7 @@
                  class="absolute inset-x-0 top-16 border-b border-stone-200 bg-white px-4 py-3 md:static md:ml-auto md:flex md:items-center md:gap-6 md:border-0 md:p-0"
                  aria-label="Navigasi utama">
                 <a href="{{ route('home') }}#menu" class="block py-2 text-sm font-medium text-stone-600 hover:text-stone-900 md:py-0">Menu</a>
-                <a href="{{ route('feedback.index') }}" class="block py-2 text-sm font-medium text-stone-600 hover:text-stone-900 md:py-0">Masukan</a>
+               <a href="{{ route('feedback.index') }}" class="block py-2 text-sm font-medium text-stone-600 hover:text-stone-900 md:py-0">Ulasan</a>
 
                 @auth
                     <a href="{{ route('orders.index') }}" class="block py-2 text-sm font-medium text-stone-600 hover:text-stone-900 md:py-0">Pesanan saya</a>
@@ -70,11 +70,43 @@
         {{ $slot }}
     </main>
 
-    <footer class="bg-stone-900 text-stone-400">
-        <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
-            <p class="font-semibold text-stone-200">{{ config('app.name', 'Web Coffee') }}</p>
+  <footer class="bg-stone-900 text-stone-400">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-3">
+        {{-- Brand --}}
+        <div>
+            <p class="text-lg font-extrabold text-white">Web Coffee</p>
+            <p class="mt-3 max-w-xs text-sm leading-relaxed">Kopi diseduh fresh setiap pesanan. Pesan online, ambil di toko saat masih hangat.</p>
+        </div>
+
+        {{-- Jelajahi --}}
+        <div>
+            <p class="text-xs font-bold uppercase tracking-widest text-stone-200">Jelajahi</p>
+            <ul class="mt-4 space-y-2 text-sm">
+                <li><a href="{{ route('home') }}#menu" class="hover:text-white">Semua Menu</a></li>
+                <li><a href="{{ route('feedback.index') }}" class="hover:text-white">Ulasan Pelanggan</a></li>
+                <li><a href="{{ route('cart.index') }}" class="hover:text-white">Keranjang</a></li>
+                <li><a href="{{ route('orders.index') }}" class="hover:text-white">Pesanan Saya</a></li>
+            </ul>
+        </div>
+
+        {{-- Toko --}}
+        <div>
+            <p class="text-xs font-bold uppercase tracking-widest text-stone-200">Toko Kami</p>
+            <ul class="mt-4 space-y-2 text-sm">
+                <li>Jl. Kopi No. 12, Jakarta</li>
+                <li>Senin - Jumat · 08.00 - 21.00</li>
+                <li>Sabtu - Minggu · 09.00 - 22.00</li>
+                <li>(021) 555-0199</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="border-t border-white/10">
+        <div class="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-5 text-sm sm:flex-row sm:items-center sm:justify-between">
+            <p class="font-semibold text-stone-200">Web Coffee</p>
             <p>Pesan online, ambil di toko. &copy; {{ date('Y') }}</p>
         </div>
-    </footer>
+    </div>
+</footer>
 </body>
 </html>
